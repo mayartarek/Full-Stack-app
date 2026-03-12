@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/BackEnd/Demo.Api/obj
+/BackEnd/Demo.Api/bin
+/BackEnd/.vs
+/BackEnd/Demo.Application/bin
+/BackEnd/Demo.Application/obj
+/BackEnd/Demo.Domain/bin
+/BackEnd/Demo.Domain/obj
+/BackEnd/Demo.Identity/obj
+/BackEnd/Demo.Identity/bin
+/BackEnd/Demo.Infrastructure/obj
+/BackEnd/Demo.Infrastructure/bin
+
