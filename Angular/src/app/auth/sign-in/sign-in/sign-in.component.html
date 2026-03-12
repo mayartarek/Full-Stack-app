@@ -1,0 +1,70 @@
+<div class="main-wrapper">
+  <div class="account-content">
+    <div class="login-wrapper">
+      <div class="login-content">
+        <div class="login-userset">
+         
+          <div class="login-userheading">
+            <h3>Sign In</h3>
+            <h4>Please Sign in</h4>
+          </div>
+          <form [formGroup]="loginForm" (keyup.enter)="FireLogin()">
+
+            <div class="form-login">
+              <label>Email</label>
+              <div class="form-addons">
+                <input type="text" formControlName="email" id="email" [ngClass]="{
+                    'is-invalid':
+                      loginForm.get('email')?.touched &&
+                      loginForm.get('email')?.invalid
+                  }" />
+              </div>
+              <div class="invalid" *ngIf="
+                  loginForm.get('email')?.hasError('required') &&
+                  (loginForm.get('email')?.touched ||
+                    loginForm.get('email')?.dirty)
+                ">
+                Email is required
+              </div>
+              <div class="invalid" *ngIf="
+                  (loginForm.get('email')?.touched ||
+                    loginForm.get('email')?.dirty) &&
+                  loginForm.get('email')?.hasError('email')
+                ">
+               wrong mail format
+              </div>
+            </div>
+            <div class="form-login">
+              <label>Password</label>
+              <div class="pass-group">
+                <input [type]="password" class="pass-input" formControlName="password" id="password" [ngClass]="{
+                    'is-invalid':
+                      loginForm.get('password')?.touched &&
+                      loginForm.get('password')?.invalid
+                  }" />
+                <span class="fas toggle-password fa-eye" (click)="onClick()" *ngIf="show"></span>
+                <span class="fas toggle-password fa-eye-slash" (click)="onClick()" *ngIf="!show"></span>
+                <div class="invalid" *ngIf="
+                    (loginForm.get('password')?.touched ||
+                      loginForm.get('password')?.dirty) &&
+                    loginForm.get('password')?.hasError('required')
+                  ">
+                 password is required
+                </div>
+              </div>
+            </div>
+           
+          </form>
+          <div class="form-login">
+            <button  click="FireLogin()" [disabled]="loginForm.invalid" class="btn btn-login">
+             Login
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="login-img">
+        <img src="../../../assets/img/login/Data_security_01.jpg" alt="img" />
+      </div>
+    </div>
+  </div>
+</div>
