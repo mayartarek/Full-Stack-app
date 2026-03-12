@@ -28,4 +28,8 @@
     <ProjectReference Include="..\Demo.Infrastructure\Demo.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Middleware\" />
+  </ItemGroup>
+
 </Project>

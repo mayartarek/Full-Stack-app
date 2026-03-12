@@ -1,0 +1,24 @@
+<div class="header">
+
+  <button (click)="toggleSidebar.emit()">☰</button>
+
+  <div class="right">
+
+    <div class="notification">
+      🔔
+      <span class="badge">3</span>
+    </div>
+
+    <div class="user-menu">
+
+      <button (click)="toggleMenu()">👤</button>
+
+      <div class="dropdown" *ngIf="menuOpen">
+        <button (click)="logout()">Logout</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

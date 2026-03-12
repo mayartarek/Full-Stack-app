@@ -1,0 +1,30 @@
+.sidebar{
+  width:220px;
+  background:#1e293b;
+  color:white;
+  padding:20px;
+  transition:0.3s;
+  height: 100vh;
+}
+
+.sidebar.collapsed{
+  width:70px;
+  height: 100vh;
+}
+
+.sidebar a{
+  display:block;
+  padding:10px;
+  color:white;
+  text-decoration:none;
+  border-radius:6px;
+  margin-top:10px;
+}
+
+.sidebar a:hover{
+  background:#334155;
+}
+
+.active{
+  background:#3b82f6;
+}

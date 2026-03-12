@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { appInterceptor } from 'src/Core/interceptor/app.interceptor';
+import { HeaderComponent } from 'src/layout/header/header.component';
+import { SideBarComponent } from 'src/layout/side-bar/side-bar.component';
+import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -12,7 +16,11 @@ import { appInterceptor } from 'src/Core/interceptor/app.interceptor';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HeaderComponent,
+    SideBarComponent,
+    CommonModule,
+     RouterOutlet
   ],
   providers: [      provideHttpClient(withFetch(), withInterceptors([appInterceptor])),
 
