@@ -1,0 +1,49 @@
+<div class="form-container">
+  <h2>Update Product</h2>
+
+  
+    <div class="image-upload">
+      <img *ngIf="imagePreview" [src]="imagePreview" class="preview" />
+
+    
+    </div>
+
+    <div class="field">
+      <label>Name:</label>
+      <p>{{ product.name }}</p>
+    </div>
+
+    <div class="field">
+      <label>Description:</label>
+      <p>{{ product.description }}</p>
+    </div>
+    <div class="field">
+      <label>Category:</label>
+      <div *ngFor="let category of categories">
+        <p *ngIf="category.id === product.categoryId">{{ category.name }}</p>
+
+      </div>
+    </div>
+   
+   
+    <div class="field">
+      <label>Stock:</label>
+      <p>{{ product.stock }}</p>
+    </div>
+    <div class=" container row">
+      <div class="field col-6">
+        <label>Price:</label>
+        <p>{{ product.price }}</p>
+      </div>
+      <div class="field col-6">
+        <label>Discount:</label>
+        <p>{{ product.discountPercentage }}</p>
+      </div>
+    </div>
+      <div class="field col-6">
+        <label>Quantity</label>
+        <input type="number" min="0" [(ngModel)]="quantity" />
+      </div>
+    <button (click)="addToCart()">Add To Cart</button>
+</div>
+
