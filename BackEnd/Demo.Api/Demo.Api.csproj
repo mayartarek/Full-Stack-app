@@ -23,13 +23,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Demo.Application\Demo.Application.csproj" />
     <ProjectReference Include="..\Demo.Identity\Demo.Identity.csproj" />
-    <ProjectReference Include="..\Demo.Infrastructure\Demo.Infrastructure.csproj" />
+    <ProjectReference Include="..\Demo.Infrastructure\Demo.Presintance.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Middleware\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

@@ -8,6 +8,7 @@ namespace Demo.Api
             {
                 await Demo.Identity.Seed.AddRoleAdmin.SeedAsync(scope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.RoleManager<Demo.Identity.Entities.ApplicationRole>>());
                 await Demo.Identity.Seed.AddFirstUser.SeedAsync(scope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.UserManager<Demo.Identity.Entities.ApplicationUser>>());
+                await Demo.Presintance.Seed.AddCategory.AddCategorySeed(scope.ServiceProvider.GetRequiredService<Demo.Infrastructure.Context.DemoDbContext>());
             }
             return app;
         }

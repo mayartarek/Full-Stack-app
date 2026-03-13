@@ -10,6 +10,7 @@ import { StorageService } from 'src/Core/Services/stoge.service';
 import { signIn } from 'src/Core/constant/api.constant';
 import { HttpHeaders } from '@angular/common/http';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SweetAlertServices } from 'src/Core/Services/sweetAlert.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -41,7 +42,8 @@ export class SignInComponent {
     public router: Router,
     public route: ActivatedRoute,
     private fb: FormBuilder,
-    private storageService:StorageService
+    private storageService:StorageService,
+    private sweetAlert:SweetAlertServices
   ) {
     this.returnUrl =
       this.route.snapshot.queryParamMap.get('redirectUrl') || '/';
@@ -86,6 +88,7 @@ this._dataService.post(`${signIn}`,user ,this.httpOptions)
             this.storageService.setUser(this.userInfo);
 
             this.authService.IsAuth.set(true);
+            //this.sweetAlert.successMessage();
             this.router.navigateByUrl(this.returnUrl);
           }
         },

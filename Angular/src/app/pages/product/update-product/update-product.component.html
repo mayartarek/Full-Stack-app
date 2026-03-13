@@ -1,0 +1,45 @@
+<div class="form-container">
+  <h2>Update Product</h2>
+
+  <form [formGroup]="form" (ngSubmit)="createProduct()">
+    <div class="image-upload">
+      <img *ngIf="imagePreview" [src]="imagePreview" class="preview" />
+
+      <input type="file" (change)="onFileSelected($event)" />
+    </div>
+
+    <div class="field">
+      <label>Name</label>
+      <input type="text" formControlName="name" />
+    </div>
+
+    <div class="field">
+      <label>Description</label>
+      <input type="text" formControlName="description" />
+    </div>
+    <div class="field">
+      <label>Category</label>
+      <select formControlName="categoryId" class="category-select">
+        <option value="">Select category</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Stock</label>
+      <input type="number" min="0" formControlName="stock" />
+    </div>
+    <div class=" container row">
+      <div class="field col-6">
+        <label>Price</label>
+        <input type="number" min="0" formControlName="price" />
+      </div>
+      <div class="field col-6">
+        <label>Discount</label>
+        <input type="number" min="0" formControlName="discountPercentage" />
+      </div>
+    </div>
+    <button type="submit">Update</button>
+  </form>
+</div>

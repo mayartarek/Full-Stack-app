@@ -37,6 +37,7 @@ namespace Demo.Identity.Service
         {
             try
             {
+                
                 var user = new ApplicationUser();
                 if (!string.IsNullOrWhiteSpace(authenticationDto.Email))
                 {

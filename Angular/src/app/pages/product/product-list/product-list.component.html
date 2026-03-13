@@ -1,1 +1,46 @@
-<p>product-list works!</p>
+<div class="container">
+
+  <div class="header">
+
+    <input 
+      type="text"
+      placeholder="Search..."
+      [(ngModel)]="searchText"
+    />
+
+    <button (click)="addItem()" [hidden]="!isAdmin">
+      + Add product
+    </button>
+
+  </div>
+
+  <div class="list">
+
+    <div class="item" *ngFor="let item of items ">
+      <img [src]="item.image" alt="{{item.name}}" />
+      <span>{{item.name}}</span>
+
+      <div class="actions">
+        <button (click)="edit(item)" [hidden]="!isAdmin">Edit</button>
+        <button (click)="view(item)">View</button>
+      </div>
+
+    </div>
+
+  </div>
+<!-- <nav>
+  <ul class="pagination">
+    <li class="page-item" [class.disabled]="pageNumber === 1">
+      <a class="page-link" (click)="onPageChange(pageNumber - 1)">Previous</a>
+    </li>
+
+    <li class="page-item" *ngFor="let p of pages" [class.active]="p === pageNumber">
+      <a class="page-link" (click)="onPageChange(p)">{{ p }}</a>
+    </li>
+
+    <li class="page-item" [class.disabled]="pageNumber === pages.length">
+      <a class="page-link" (click)="onPageChange(pageNumber + 1)">Next</a>
+    </li>
+  </ul>
+</nav> -->
+</div>

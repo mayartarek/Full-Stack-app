@@ -8,6 +8,6 @@
   </Folder>
   <Folder Name="/Infratructure/">
     <Project Path="Demo.Identity/Demo.Identity.csproj" />
-    <Project Path="Demo.Infrastructure/Demo.Infrastructure.csproj" />
+    <Project Path="Demo.Infrastructure/Demo.Presintance.csproj" />
   </Folder>
 </Solution>

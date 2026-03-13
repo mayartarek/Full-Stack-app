@@ -41,9 +41,7 @@ export class StorageService {
     setUser(value: any) {
         return this.setStorage('user', JSON.stringify(value));
     }
-    setLanguage(value: any) {
-        return this.setStorage('language', JSON.stringify(value));
-    }
+    
 
     setExpiresIn(value: any) {
         return this.setStorage('expires_in', value);
