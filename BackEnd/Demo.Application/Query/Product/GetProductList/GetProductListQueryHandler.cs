@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
+using Demo.Application.Constract.Interface;
 using Demo.Application.Helper;
 using Demo.Domain.Entities;
-using Demo.Infrastructure.Context;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +14,9 @@ namespace Demo.Application.Query.Product.GetProductList
     public class GetProductListQueryHandler : IRequestHandler<GetProductListQuery, PaginationList<GetProductListVm>>
     {
         private readonly IMapper mapper;
-        private readonly DemoDbContext demoDbContext;
+        private readonly IRepositoryPattern<Domain.Entities.Product> demoDbContext;
 
-        public GetProductListQueryHandler(IMapper mapper, DemoDbContext demoDbContext)
+        public GetProductListQueryHandler(IMapper mapper, IRepositoryPattern<Domain.Entities.Product> demoDbContext)
         {
             this.mapper = mapper;
             this.demoDbContext = demoDbContext;
@@ -30,14 +29,13 @@ namespace Demo.Application.Query.Product.GetProductList
                 List = PRODUCTS,
                 Page = request.PageNumber,
                 Size = request.PageSize,
-                Count = await demoDbContext.Products.CountAsync()
+                Count = await demoDbContext.GetTotalCountAsync()
             };
             return result;
         }
         public async Task<List<GetProductListVm>> GetProducts(GetProductListQuery request)
         {
-            var query = demoDbContext.Products.AsQueryable();
-
+            var query = await demoDbContext.GetAllAsync();
             if (!string.IsNullOrEmpty(request.Filter.Name))
             {
                 var nameFilter = request.Filter.Name.ToLower();
@@ -49,7 +47,7 @@ namespace Demo.Application.Query.Product.GetProductList
                 query = query.Where(a => request.Filter.CategoryIds.Contains(a.CategoryId));
             }
 
-            var products = await query
+            var products =  query
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .Select(a => new GetProductListVm
@@ -62,7 +60,7 @@ namespace Demo.Application.Query.Product.GetProductList
                     Image = a.Image,
                     Stock = a.Stock,
                 })
-                .ToListAsync();
+                .ToList();
 
             return products;
         }

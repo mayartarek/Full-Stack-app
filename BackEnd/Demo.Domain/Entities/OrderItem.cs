@@ -12,7 +12,7 @@ namespace Demo.Domain.Entities
         public decimal Price { get; set; }
         //for all datat related to product save as json
         public decimal DiscontPercentag { get; set; }
-
+        public Guid ProductId { get; set; }
         public string ProductDetailsJson { get; set; } = string.Empty;
         public int Quantity { get; set; }
         public Guid OrderId { get; set; }

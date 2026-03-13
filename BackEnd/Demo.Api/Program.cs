@@ -1,6 +1,7 @@
 using Demo.Api;
 using Demo.Api.Middleware;
 using Demo.Application;
+using Demo.Application.Constract.Interface;
 using Demo.Identity;
 using Demo.Infrastructure;
 using Microsoft.OpenApi.Models;
@@ -10,8 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDemoIdentity(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
-builder.Services.AddPersistence(builder.Configuration);
-
+builder.Services.AddPersistence(builder.Configuration); 
+builder.Services.AddScoped<ILoggedInerface, Demo.Api.Service.LoggedService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());

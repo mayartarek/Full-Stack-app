@@ -14,4 +14,16 @@ export const PagesRoutes: Routes = [
       import('./product/product.module').then((m) => m.ProductRoutes),
     canActivate:[AuthGuard]
   },
+  {
+    path: 'cart',
+    loadChildren: () =>
+      import('./cart/cart.module').then((m) => m.CartRoutes),
+    canActivate:[AuthGuard]
+  },
+   {
+    path: 'order',
+    loadChildren: () =>
+      import('./order/Checkout.module').then((m) => m.CheckOutRoutes),
+    canActivate:[AuthGuard]
+  },
 ]

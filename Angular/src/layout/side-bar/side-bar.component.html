@@ -2,16 +2,14 @@
 
   <h3 *ngIf="!collapsed">Menu</h3>
 
-  <a routerLink="/dashboard" routerLinkActive="active">
-    📊 <span *ngIf="!collapsed">Dashboard</span>
+  <a [routerLink]="['/order/Order-list']" routerLinkActive="active">
+    📊 <span *ngIf="!collapsed">Order List</span>
   </a>
 
-  <a routerLink="/product" routerLinkActive="active">
+  <a [routerLink]="['/product/product']" routerLinkActive="active">
     📦 <span *ngIf="!collapsed">Products</span>
   </a>
 
-  <a routerLink="/settings" routerLinkActive="active">
-    ⚙️ <span *ngIf="!collapsed">Settings</span>
-  </a>
+
 
 </div>

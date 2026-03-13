@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Demo.Infrastructure.Context;
+using Demo.Application.Constract.Interface;
+using Demo.Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,22 +14,22 @@ namespace Demo.Application.Query.Category.GetCategoruLookUp
 
     {
         private readonly IMapper mapper;
-        private readonly DemoDbContext demoDbContext;
+        private readonly IRepositoryPattern<Domain.Entities.Category> demoDbContext;
 
-        public GetCategoruLookUpQueryHandler(IMapper mapper,DemoDbContext demoDbContext)
+        public GetCategoruLookUpQueryHandler(IMapper mapper,IRepositoryPattern<Domain.Entities.Category> demoDbContext)
         {
             this.mapper = mapper;
             this.demoDbContext = demoDbContext;
         }
         public async Task<List<GetCategoruLookUpVm>> Handle(GetCategoruLookUpQuery request, CancellationToken cancellationToken)
         {
-            return await demoDbContext.Categories
+            return  demoDbContext.GetAllAsync().Result
                     .Select(x => new GetCategoruLookUpVm
                     {
                         Id = x.Id,
                         Name = x.Name
                     })
-                    .ToListAsync();
+                    .ToList();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using Demo.Application.Constract.Interface;
 using Demo.Application.CustomException;
-using Demo.Infrastructure.Context;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -14,11 +14,11 @@ namespace Demo.Application.Command.Product.CreateProduct
     public class CreateProdductRequestHandler : IRequestHandler<CreateProdductRequest,bool>
 
     {
-        private readonly DemoDbContext demoDbContext;
+        private readonly IRepositoryPattern<Domain.Entities.Product> demoDbContext;
         private readonly IMapper mapper;
         private readonly IConfiguration configuration;
 
-        public CreateProdductRequestHandler(DemoDbContext demoDbContext,IMapper mapper, IConfiguration configuration)
+        public CreateProdductRequestHandler(IRepositoryPattern<Domain.Entities.Product> demoDbContext,IMapper mapper, IConfiguration configuration)
         {
             this.demoDbContext = demoDbContext;
             this.mapper = mapper;
@@ -56,9 +56,8 @@ namespace Demo.Application.Command.Product.CreateProduct
             product.Stock = request.Stock;
             product.DiscountPercentage = request.DiscountPercentage;
             product.CategoryId=request.CategoryId;
-            await this.demoDbContext.Products.AddAsync(product);
+            await this.demoDbContext.AddAsync(product);
 
-            await this.demoDbContext.SaveChangesAsync();
             return true;
         }
     }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Demo.Application.Command.Product.CreateProduct;
+using Demo.Application.Constract.Interface;
 using Demo.Application.CustomException;
-using Demo.Infrastructure.Context;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -14,11 +14,11 @@ namespace Demo.Application.Command.Product.UpdateProduct
 {
     public class UpdateProdductRequestHandler : IRequestHandler<UpdateProdductRequest, bool>
     {
-        private readonly DemoDbContext demoDbContext;
+        private readonly IRepositoryPattern<Domain.Entities.Product> demoDbContext;
         private readonly IMapper mapper;
         private readonly IConfiguration configuration;
 
-        public UpdateProdductRequestHandler(DemoDbContext demoDbContext, IMapper mapper,IConfiguration configuration)
+        public UpdateProdductRequestHandler(IRepositoryPattern<Domain.Entities.Product> demoDbContext, IMapper mapper,IConfiguration configuration)
         {
             this.demoDbContext = demoDbContext;
             this.mapper = mapper;
@@ -31,7 +31,7 @@ namespace Demo.Application.Command.Product.UpdateProduct
             if (validationResult.Errors.Count > 0)
                 throw new ValidationException(validationResult);
             
-            var product = await demoDbContext.Products.FindAsync(request.Id);
+            var product = await demoDbContext.GetByIdAsync(request.Id);
             if (product == null)
                 throw new NotFoundException("Product not found",request.Id); 
 
@@ -54,8 +54,7 @@ namespace Demo.Application.Command.Product.UpdateProduct
             product.Stock = request.Stock;
             product.DiscountPercentage = request.DiscountPercentage;
             product.CategoryId = request.CategoryId;
-            demoDbContext.Products.Update(product); 
-                await demoDbContext.SaveChangesAsync();
+            await demoDbContext.UpdateAsync(product); 
             return true;
 
         }
